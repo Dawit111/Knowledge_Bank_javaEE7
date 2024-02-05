@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="resources/templates/templateCommon.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="contents">
+        <h:form id="frmToolBar"> 
+            <p:toolbar style="background-color:white;border-color:white">
+                <f:facet name="right">
+                    <!--                    <p:commandButton id="btnNew" action="#/{StudentController.createNewOrSearch()}" 
+                                                         style="background-color: whitesmoke; border-color: white" 
+                                                         icon="#.{StudentController.icone}" validateClient="true" 
+                                                         process="@this" update="@this,:frmPatient,:frmToolBar"
+                                                         title="#.{StudentController.createOrSearchBundle}" />-->
+                    <span class="ui-separator">
+                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                    </span>
+                    <a href="departmentView.xhtml"><i class="fa fa-fw fa-refresh" title="Refresh"></i></a>
+                    <span class="ui-separator">
+                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                    </span>
+                    <a href="Admin_Dashboard.xhtml"><i class="fa fa-fw fa-dashboard" title="Admin Dashboard"></i></a>
+                    <!--  <span class="ui-separator">
+                          <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                      </span>
+  
+                      <a href="../opdDashboard.xhtml"><i class="fa fa-fw fa-dashboard" title="Dashboard"></i></a>
+                      <span class="ui-separator" >
+                          <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                      </span>
+                      <a href="../../HomePage.xhtml"><i class="fa fa-home" title="Home Page"></i></a>
+                    -->
+                </f:facet>
+            </p:toolbar>
+        </h:form>
+        <h:form id="frmMain">
+            <p:growl id="growl" showDetail="true" autoUpdate="true" severity="information,fatal"/>
+            <div class="row">
+
+                <h:panelGroup id="departpnl">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box box-primary ">
+                                <div class="box-body ">
+
+                                    <div class="col-md-12">
+                                        <div class="form-group col-sm-12 textBoxMargin6px">
+                                            <div class="form-horizontal col-sm-12"> 
+                                                <div class="box-header with-border">
+                                                    <h2 class="box-title">ADD NEW DEPARTMENT BELOW<small></small></h2>   
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="col-md-12 textBoxMargin6px form-group">
+                                                        <div class="form-horizontal">
+                                                            <p:outputLabel id="lblfac" value="Choose Faculty" class="control-label col-md-4"/>
+                                                            <div class="col-sm-8">
+                                                                <h:selectOneMenu id="txtFaculty" value="#{studentController.faculty.facId}"  style="width: 100%" converter="entConverter"
+                                                                                 valueChangeListener="#{studentController.FacultyVCL}" >
+                                                                    <f:selectItem itemValue="" itemLabel="...Select Faculty..." noSelectionOption="true"/>
+                                                                    <f:selectItems value="#{studentController.facuList}" var="reg" itemValue="#{reg.facId}" itemLabel="#{reg.facuName}"/>
+                                                                    <p:ajax event="change" process="@this" update="@this" />
+                                                                </h:selectOneMenu>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-12 textBoxMargin6px form-group">
+                                                        <div class="form-horizontal">
+                                                            <h:outputLabel id="lbldept" value="Department Name :" class="control-label col-md-4"/>
+                                                            <div class="col-sm-8">
+                                                                <h:inputText id="txtdept" value="#{studentController.department.depName}" required="true" requiredMessage="Department Name Required !"/>
+                                                                <p:message for="txtdept" display="icon"/> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 textBoxMargin6px form-group">
+                                                        <div class="form-horizontal">
+                                                            <h:outputLabel value="" class="control-label col-md-4"/>
+                                                            <div class="col-sm-4">
+                                                                <p:commandButton id="svdep" value="ADD" action="#{studentController.saveDepartment}" process="@this,departpnl" update="frmMain"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div></div></div></div></div></div></div>
+                    </div>
+                </h:panelGroup>
+
+                <div class="col-md-12">
+                    <p:panelGrid columns="1" style="float: left;"> 
+                        <p:dataTable id="tblSavedDoc"  var="currentRow" rowIndexVar="num" value="#{studentController.allDepList}"
+                                     paginator="true" selectionMode="single" rowKey="#{currentRow.depId}"
+                                     selection="#{studentController.department}" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rows="15" rowsPerPageTemplate="5,10,15,20" style="border: none; font-family: 'Lucida Sans'; font-size: 11px; font-style: normal; font-weight: lighter; width:1000px">
+                            <p:ajax event="rowSelect" listener="#{studentController.onRowSelectDepartment}" process="@this,tblSavedDoc" update="tblSavedDoc"/>
+                            <p:column headerText="No." width="50">
+                                <h:outputText value="#{num+1}"/>
+                            </p:column>
+
+                            <p:column id="DepName" headerText="Department Name"> 
+                                <h:outputText id="txtdept" value="#{currentRow.depName}" style="text-align: left;"/>
+                            </p:column>
+                            
+                            <p:column id="FacuName" headerText="Faculty Name"> 
+                                <h:outputText id="txtfacu" value="#{currentRow.facuId.facuName}" style="text-align: left;"/>
+                            </p:column>
+
+                            <p:column id="decDelete" headerText="Delete" width="100">
+                                <p:commandButton process="@this,tblSavedDoc" update="tblSavedDoc" value="delete" icon="ui-icon-delete" styleClass="ui-button-danger"
+                                                 action="#{studentController.deleteDepartment}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panelGrid>
+                </div>
+            </div>
+
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
+

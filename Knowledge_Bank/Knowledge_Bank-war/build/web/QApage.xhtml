@@ -1,0 +1,316 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="resources/templates/templateCommon.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="contents">
+        <div class="row">
+
+            <h:form id="frmToolBar"> 
+                <!--       <p:toolbar style="background-color:white;border-color:white">
+                         <f:facet name="right">
+                             <p:commandButton id="btnNew" value="Upload File" action="#/{qA_controller.uploadPage()}" 
+                                              style="background-color: whitesmoke; border-color: white" 
+                                              icon="#/{qA_controller.icone}" validateClient="true" 
+                                              process="@this" update="@this,:frmMain,:frmToolBar"
+                                              title="upload" />
+                      
+                             <a href="admin_home_page.xhtml"><i class="fa fa-fw fa-refresh" title="Refresh"></i></a>
+         
+                               <span class="ui-separator">
+                                   <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                               </span>
+           
+                               <a href="../opdDashboard.xhtml"><i class="fa fa-fw fa-dashboard" title="Dashboard"></i></a>
+                               <span class="ui-separator" >
+                                   <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                               </span>
+                               <a href="../../HomePage.xhtml"><i class="fa fa-home" title="Home Page"></i></a>
+                             
+                         </f:facet>
+                     </p:toolbar>-->
+
+                <p:toolbar>
+                    <p:toolbarGroup align="left">
+                        <p:commandButton value="My Dashboard" icon="pi pi-file" styleClass="mr-2" action="#{fileControl.viewAdminOrUserDashboard()}"/>
+                        <p:commandButton disabled="#{qA_controller.disableRefreshBtn}" value="Refresh" icon="pi pi-file" styleClass="mr-2" action="#{qA_controller.refreshDiscussionPage}"/>
+                    </p:toolbarGroup>
+                    <p:toolbarGroup align="right">
+                        <p:commandButton process="@this,:formQA" update="@this,:formQA,:frmToolBar" title="#{qA_controller.askOrQAtitle}" value="#{qA_controller.askOrQAbundle}" icon="pi pi-question" styleClass="mr-2" action="#{qA_controller.questionAskPage()}"/>
+                    </p:toolbarGroup>
+                    <span class="ui-separator">
+                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                    </span>
+                    <p:toolbarGroup align="right">
+                        <p:commandButton disabled="#{qA_controller.disableGoToFilesPageBtn}" process="@this,:formQA" update="@this,:formQA,:frmToolBar" title="Go to File Page" value="Files Page" icon="pi pi-question" styleClass="mr-2" action="#{qA_controller.userHomePage()}"/>
+                    </p:toolbarGroup>
+                    <!--                        <p:toolbarGroup align="right">
+                                                <a href="QApage.xhtml"><i class="fa fa-fw fa-dashboard" title="User Home Page"></i>User Home</a>
+                                            </p:toolbarGroup>-->
+
+                </p:toolbar>
+            </h:form>
+
+
+
+            <h:form id="formQA">
+                <p:growl id="growl" showDetail="true" autoUpdate="true" severity="information,fatal"/> 
+                <h:panelGroup id="QAPnl" rendered="#{qA_controller.QAPnl}">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box box-primary ">
+                                <div class="box-body ">
+
+                                    <div class="col-md-12">
+                                        <div class="form-group col-sm-12 textBoxMargin6px">
+                                            <div class="form-horizontal col-sm-12"> 
+                                                <p class="text-center " >
+                                                    <h2>Filter Questions By Academics</h2>
+                                                </p>
+                                                <div class="col-md-12">
+                                                    <div class="col-md-6">
+                                                        <div class="col-md-12 textBoxMargin6px form-group">
+                                                            <div class="form-horizontal">
+
+                                                                <div class="col-md-12 textBoxMargin6px form-group">
+                                                                    <div class="form-horizontal">
+                                                                        <p:outputLabel  value="FACULTY" class="control-label col-md-4"/>
+                                                                        <div class="col-sm-8">
+                                                                            <p:selectOneMenu id="txtFaculty" value="#{qA_controller.faculty.facId}"  style="width: 100%" converter="entConverter"
+                                                                                             valueChangeListener="#{qA_controller.FacultyVCL}" >
+                                                                                <f:selectItem itemValue="" itemLabel="...select Faculty..." noSelectionOption="true"/>
+                                                                                <f:selectItems value="#{qA_controller.facuList}" var="reg" itemValue="#{reg.facId}" itemLabel="#{reg.facuName}"/>
+                                                                                <p:ajax event="change" process="@this" update="txtdepartment" />
+                                                                            </p:selectOneMenu>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12 textBoxMargin6px form-group">
+                                                                    <div class="form-horizontal">
+                                                                        <p:outputLabel  value="DEPARTMENT" class="control-label col-md-4"/>
+                                                                        <div class="col-sm-8">
+                                                                            <p:selectOneMenu id="txtdepartment" value="#{qA_controller.department.depId}"  style="width: 100%" converter="entConverter"
+                                                                                             valueChangeListener="#{qA_controller.DeptVCL}" >
+                                                                                <f:selectItem itemValue="" itemLabel="...select Department..." noSelectionOption="true"/>
+                                                                                <f:selectItems value="#{qA_controller.departmentList}" var="reg" itemValue="#{reg.depId}" itemLabel="#{reg.depName}"/>
+                                                                                <p:ajax event="change" process="@this,txtdepartment" update="formQA:regpnl,tblSavedDoc:tblSaved" />
+                                                                            </p:selectOneMenu>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12 textBoxMargin6px form-group">
+                                                                    <div class="form-horizontal">
+                                                                        <p:outputLabel  value="STUDY-YEAR" class="control-label col-md-4"/>
+                                                                        <div class="col-sm-8">
+                                                                            <p:selectOneMenu id="txtyear" value="#{qA_controller.yearOfStudy.yearId}"  style="width: 100%" converter="entConverter"
+                                                                                             valueChangeListener="#{qA_controller.YearOfStudyVCL}" >
+                                                                                <f:selectItem itemValue="" itemLabel="...select Year..." noSelectionOption="true"/>
+                                                                                <f:selectItems value="#{qA_controller.yearList}" var="reg" itemValue="#{reg.yearId}" itemLabel="#{reg.name}"/>
+                                                                                <p:ajax event="change" process="@this" update="formQA,regpnl,txtyear,txtcourse,tblSavedDoc:tblSaved" />
+                                                                            </p:selectOneMenu>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12 textBoxMargin6px form-group">
+                                                                    <div class="form-horizontal">
+                                                                        <p:outputLabel  value="COURSE" class="control-label col-md-4"/>
+                                                                        <div class="col-sm-8">
+                                                                            <p:selectOneMenu id="txtcourse" value="#{qA_controller.depCoursYear.courseFk.coId}"  style="width: 100%" converter="entConverter"
+                                                                                             valueChangeListener="#{qA_controller.CourseVCL}" >
+                                                                                <f:selectItem itemValue="" itemLabel="...select Course..." noSelectionOption="true"/>
+                                                                                <f:selectItems value="#{qA_controller.depyrList}" var="reg" itemValue="#{reg.courseFk.coId}" itemLabel="#{reg.courseFk.courseName}"/>
+                                                                                <p:ajax event="change" process="@this" update="formQA:regpnl,tblSavedDoc:tblSaved" />
+                                                                            </p:selectOneMenu>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12"><h:outputLabel value=""/></div>
+                                                                <h2>Search your Question Here</h2>
+                                                                <div class="form-group col-sm-12 col-md-12 textBoxMargin6px">
+                                                                    <div class="form-horizontal">   
+                                                                        <!--                                                                    <p:outputLabel  value="Search by Question:" class="control-label col-md-4"/>-->
+                                                                        <p:outputLabel value="" class="control-label col-md-4"/>
+                                                                        <div class="col-sm-8">
+                                                                            <h:inputTextarea rows="4" cols="40" id="txtname" value="#{qA_controller.question.question}"></h:inputTextarea> 
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12 textBoxMargin6px form-group">
+                                                                    <div class="form-horizontal">
+                                                                        <p:outputLabel value="" class="control-label col-md-4"/>
+                                                                        <div class="col-sm-3">
+                                                                            <p:commandButton id="btnsearch" process="@this,txtname,formQA:regpnl,tblSavedDoc:tblSaved" update="formQA:regpnl,tblSavedDoc:tblSaved" value="Search" class="btn btn-block btn-primary" action="#{qA_controller.searchByQuestion()}"></p:commandButton>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <h:panelGroup id="regpnl">
+                        <p:dataScroller id="tblSavedDoc" value="#{qA_controller.questionDataModel}" var="product" chunkSize="30">
+
+
+                            <div class="row">
+
+
+                                <div class="col-md-12 ">
+                                    <div class="box box-primary ">
+                                        <div class="box-body ">
+
+                                            <!--                                <div class="col-md-3">
+                                                                                <p:outputLabel value="" ></p:outputLabel>
+                                                                            </div>-->
+
+                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                                <div>Asked By :#{product.userFk.username}</div>
+                                                <div>Asked Date :#{product.dateAsked}</div>
+                                                <i> <h2><h:outputLabel value="#{product.question}"/></h2></i>
+                                                <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                                    <h:inputTextarea class="col-md-12 col-sm-12 col-lg-12 col-xs-12" rows="10" cols="100" id="txtanswer" value="#{qA_controller.answer.answerContent}"></h:inputTextarea>
+                                                    <p:watermark for="txtanswer" value="Type Your Answer about the Question..." id="watermark"/>
+                                                    <p:commandButton process="@this,txtanswer" update="tblSavedDoc,tblSaved" title="post your answer to the public"
+                                                                     value="post Your Answer" action="#{qA_controller.postAnswer()}"></p:commandButton>
+                                                    <p:commandButton process="@this" update="tblSaved" title="view all answers of this question"
+                                                                     value="View Answers" action="#{qA_controller.viewAnswers()}"></p:commandButton>
+                                                </div>
+
+                                                <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                                    <p:dataScroller id="tblSaved" value="#{qA_controller.answerDataModel}" var="ans" chunkSize="30">
+                                                        <div class="col-md-12">    
+                                                            <div>Answered By :#{ans.userFk.username}</div><h:outputLabel value="#. #{ans.answerContent}"/>
+                                                        </div>
+                                                        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12"><h:outputLabel value=""/></div>
+                                                        <p:commandButton process="@this," update="tblSaved" title="Satisfied"
+                                                                         style="background-color: #0072b1;"  value="Like (#{qA_controller.likeAmount(likeAmount)})" action="#{qA_controller.doLike()}"></p:commandButton>
+                                                        <p:commandButton process="@this," update="tblSaved" title="Not satisfied"
+                                                                         style="background-color: red;" value="DisLike (#{qA_controller.disLikeAmount(dislikeAmount)})" action="#{qA_controller.doDisLike()}"></p:commandButton>
+                                                        <hr style="height: 1px; background-color: #999 "></hr>
+                                                    </p:dataScroller>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>   
+                            </div>
+                        </p:dataScroller>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <h:panelGroup id="questionPnl" rendered="#{qA_controller.questionPnl}">
+                    <div class="box-header with-border">
+                        <h2 class="box-title">.... Ask any Question on your Mind ....</h2>   
+                    </div> 
+                    <div class="box-body">
+                        <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
+                            <div class="col-md-12 textBoxMargin6px form-group">
+                                <div class="form-horizontal">
+                                    <p:outputLabel  value="FACULTY" class="control-label col-md-4"/>
+                                    <div class="col-sm-8">
+                                        <p:selectOneMenu id="txtFaculty1" value="#{qA_controller.faculty.facId}"  style="width: 100%" converter="entConverter"
+                                                         valueChangeListener="#{qA_controller.FacultyVCL1}" >
+                                            <f:selectItem itemValue="" itemLabel="...select Faculty..." noSelectionOption="true"/>
+                                            <f:selectItems value="#{qA_controller.facuList}" var="reg" itemValue="#{reg.facId}" itemLabel="#{reg.facuName}"/>
+                                            <p:ajax event="change" process="@this" update="txtdepartment1" />
+                                        </p:selectOneMenu>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 textBoxMargin6px form-group">
+                                <div class="form-horizontal">
+                                    <p:outputLabel  value="DEPARTMENT" class="control-label col-md-4"/>
+                                    <div class="col-sm-8">
+                                        <p:selectOneMenu id="txtdepartment1" value="#{qA_controller.department.depId}"  style="width: 100%" converter="entConverter"
+                                                         valueChangeListener="#{qA_controller.DeptVCL1}" >
+                                            <f:selectItem itemValue="" itemLabel="...select Department..." noSelectionOption="true"/>
+                                            <f:selectItems value="#{qA_controller.departmentList}" var="reg" itemValue="#{reg.depId}" itemLabel="#{reg.depName}"/>
+                                            <p:ajax event="change" process="@this,txtdepartment1" update="txtdepartment1" />
+                                        </p:selectOneMenu>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 textBoxMargin6px form-group">
+                                <div class="form-horizontal">
+                                    <p:outputLabel  value="STUDY-YEAR" class="control-label col-md-4"/>
+                                    <div class="col-sm-8">
+                                        <p:selectOneMenu id="txtyear1" value="#{qA_controller.yearOfStudy.yearId}"  style="width: 100%" converter="entConverter"
+                                                         valueChangeListener="#{qA_controller.YearOfStudyVCL1}" >
+                                            <f:selectItem itemValue="" itemLabel="...select Year..." noSelectionOption="true"/>
+                                            <f:selectItems value="#{qA_controller.yearList}" var="reg" itemValue="#{reg.yearId}" itemLabel="#{reg.name}"/>
+                                            <p:ajax event="change" process="@this" update="txtyear1,txtcourse1" />
+                                        </p:selectOneMenu>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 textBoxMargin6px form-group">
+                                <div class="form-horizontal">
+                                    <p:outputLabel  value="COURSE" class="control-label col-md-4"/>
+                                    <div class="col-sm-8">
+                                        <p:selectOneMenu id="txtcourse1" value="#{qA_controller.course.coId}"  style="width: 100%" converter="entConverter"
+                                                         valueChangeListener="#{qA_controller.CourseVCL1}" >
+                                            <f:selectItem itemValue="" itemLabel="...select Course..." noSelectionOption="true"/>
+                                            <f:selectItems value="#{qA_controller.depyrList}" var="reg" itemValue="#{reg.courseFk.coId}" itemLabel="#{reg.courseFk.courseName}"/>
+                                            <p:ajax event="change" process="@this" update="txtcourse1" />
+                                        </p:selectOneMenu>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12"><h:outputLabel value=""/></div>
+                            <h2></h2>
+                            <div class="col-md-12 textBoxMargin6px form-group">
+                                <div class="form-horizontal">   
+
+                                    <!--                                                             <div class="col-md-4 col-sm-12 col-lg-12 col-xs-12"><h:outputLabel value=""/></div>  -->
+                                    <p:outputLabel value="YOUR QUESTION" class="control-label col-md-4"/>
+                                    <div class="col-sm-8">
+                                        <h:inputTextarea class="col-md-12" rows="10" cols="40" id="txtnam" value="#{qA_controller.question.question}"></h:inputTextarea> 
+                                        <p:watermark for="txtnam" value="Type a question on your mind"></p:watermark>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 textBoxMargin6px form-group">
+                                <div class="form-horizontal">
+                                    <p:outputLabel  value="DATE:" class="control-label col-md-4"/>
+                                    <div class="col-sm-8">
+                                        <p:inputText id="txtquest" value="#{qA_controller.question.dateAsked}"
+                                                     onclick="displayCalendar('formQA:txtquest', 'formQA:txtquest')"
+                                                     ></p:inputText>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 textBoxMargin6px form-group">
+                                <div class="form-horizontal">
+                                    <p:outputLabel value="" class="control-label col-md-4"/>
+                                    <div class="col-sm-3">
+                                        <p:commandButton id="btnquest" process="@this,txtname,questionPnl" update="formQA:questionPnl" value="Post Question" class="btn btn-block btn-primary" action="#{qA_controller.saveQuestion()}"></p:commandButton>
+                                    </div>
+                                </div>
+                            </div> 
+
+
+                        </div>
+                    </div>
+
+                </h:panelGroup>
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>
+

@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition     xmlns="http://www.w3.org/1999/xhtml"
+                    template="resources/templates/templateCommon.xhtml"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:p="http://primefaces.org/ui"
+                    xmlns:f="http://java.sun.com/jsf/core"
+                    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="navigaion_content">
+        <li><a href="../opdDashboard.xhtml" title="Dashboard"><i class="fa  fa-fw fa-dashboard"></i> <span>Dashboard</span></a></li>
+    </ui:define>
+    <ui:define name="contents">
+        <h:form id="frmToolBar"> 
+            <p:toolbar style="background-color:white;border-color:white">
+                <f:facet name="right">
+
+
+                    <a href="userAcademicsView.xhtml"><i class="fa fa-fw fa-refresh" title="Refresh"></i></a>
+
+                    <!--  <span class="ui-separator">
+                          <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                      </span>
+  
+                      <a href="../opdDashboard.xhtml"><i class="fa fa-fw fa-dashboard" title="Dashboard"></i></a>
+                      <span class="ui-separator" >
+                          <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                      </span>
+                      <a href="../../HomePage.xhtml"><i class="fa fa-home" title="Home Page"></i></a>
+                    -->
+                </f:facet>
+            </p:toolbar>
+        </h:form>
+        <h:form id="frmMain">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary ">
+                        <h:form id="frmPatient">
+                            <p:growl id="growl" showDetail="true" autoUpdate="true" severity="information,fatal"/>  
+
+                            
+                    
+
+                   
+                            <div class="col-md 12">
+                                <div class="form-group">
+                                    <div class="box box-primary">
+                                        <p:dataTable value="#{StudentController.acadDataModel}" id="academicDt" var="acad" selectionMode="single"
+                                                     paginator="true" paginatorPosition="bottom" rows="10" 
+                                                     rowsPerPageTemplate="5,10,20,100" class="dataTable"
+                                                     rowIndexVar="num" rowKey="#{acad.dcyId}" selection="#{StudentController.depCoursYear}">
+                                            <p:ajax event="rowSelect" process="@this,academicDt" update="@this,:frmMain" listener="#{StudentController.AcademicsSelection}"/>
+
+                                            <p:column headerText="No." width="50">
+                                                <h:outputText value="#{num+1}"/>
+                                            </p:column>
+                                            <p:column headerText="Departmnet." width="50">
+                                                <h:outputText value="#{acad.depFk.depName}"/>
+                                            </p:column>
+                                            <p:column headerText="Year." width="50">
+                                                <h:outputText value="#{acad.yosFk.name}"/>
+                                            </p:column>
+                                            <p:column headerText="Course." width="50">
+                                                <h:outputText value="#{acad.courseFk.courseName}"/>
+                                            </p:column>
+
+                                        </p:dataTable>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </h:form>
+
+
+                    </div>  
+                </div>
+            </div>
+
+
+
+
+        </h:form>
+
+
+
+
+    </ui:define>
+</ui:composition>
+
+

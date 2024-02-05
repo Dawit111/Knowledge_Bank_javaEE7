@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="resources/templates/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="navigaion_content">
+        <li><a href="../opdDashboard.xhtml" title="Dashboard"><i class="fa  fa-fw fa-dashboard"></i> <span>Dashboard</span></a></li>
+    </ui:define>
+    <ui:define name="contents">
+        <h:form id="frmMain">
+            <h:link value="Admin Home" outcome="admin_home_page.xhtml"></h:link>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary ">
+                        <section class="panel panel-info"  >
+                            <section class="panel-body" >
+                                <p:growl id="growl" showDetail="true" autoUpdate="true" severity="information,fatal"/>  
+                                <div class="col-md-6">
+                                    <div class="col-md-12 textBoxMargin6px">
+                                        <div class="form-group form-horizontal form-group required">
+                                            <h:outputLabel id="lblId" value="Id No :" class="col-md-4" for="txtId"/>
+                                            <h:inputText  id="txtId" value="#{profileController.useraccount.id}"  required="true" requiredMessage="Please fill id."  />
+                                            <p:message for="txtId" display="icon"/> 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 textBoxMargin6px">
+                                        <div class="form-group form-horizontal form-group required">
+                                            <h:outputLabel id="lblFname" value="FULL NAME :" class="col-md-4" for="txtFname"/>
+                                            <h:inputText  id="txtFname" value="#{profileController.useraccount.username}"  required="true" requiredMessage="Please fill first name."  />
+                                            <p:message for="txtFname" display="icon"/> 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 textBoxMargin6px">
+                                        <div class="form-group form-horizontal form-group required">
+                                            <h:outputLabel id="lblLname" value="ROLE :" class="col-md-4" for="txtLname"/>
+                                            <h:inputText id="txtLname" value="#{profileController.useraccount.role}"  required="true" requiredMessage="Please fill last name."  />
+                                            <p:message for="txtLname" display="icon"/>
+                                        </div>
+                                    </div>
+                                    
+                                  
+                                    <div class="col-md-12 textBoxMargin6px">
+                                        <div class="form-group form-horizontal form-group required">
+                                            <h:outputLabel value="PASSWORD :" class="col-md-4" for="txtpass"/>
+                                            <div class="col-md-5">
+                                                <p:password id="txtpass" value="#{profileController.useraccount.password}" class="col-md-4"  required="true" requiredMessage="Please fill password." />
+                                                <p:message for="txtpass" display="icon"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                    <div class="col-md-12 textBoxMargin6px">
+                                        <div class="form-group form-horizontal form-group required">
+                                            <h:outputLabel id="lblIdd" value="Id No :" class="col-md-4" for="txtIdd"/>
+                                            <h:inputText  id="txtIdd" value="#{profileController.register.id}"  required="true" requiredMessage="Please fill id."  />
+                                            <p:message for="txtIdd" display="icon"/> 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 textBoxMargin6px">
+                                        <div class="form-group form-horizontal form-group required">
+                                            <h:outputLabel id="lblFnamee" value="YOUR NAME :" class="col-md-4" for="txtFnamee"/>
+                                            <h:inputText  id="txtFnamee" value="#{profileController.register.fname}"  required="true" requiredMessage="Please fill first name."  />
+                                            <p:message for="txtFnamee" display="icon"/> 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 textBoxMargin6px">
+                                        <div class="form-group form-horizontal form-group required">
+                                            <h:outputLabel id="lblLnamee" value="FATHER NAME :" class="col-md-4" for="txtLnamee"/>
+                                            <h:inputText id="txtLnamee" value="#{profileController.register.lname}"  required="true" requiredMessage="Please fill last name."  />
+                                            <p:message for="txtLnamee" display="icon"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 textBoxMargin6px">
+                                        <div class="form-group form-horizontal form-group required">
+                                            <h:outputLabel id="lbldeptt" value="DEPARTMENT :" class="col-md-4" for="txtDeptt"/>
+                                            <h:inputText id="txtDeptt" value="#{profileController.register.department}" required="true" requiredMessage="Please fill department." />
+                                            <p:message for="txtDeptt" display="icon"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 textBoxMargin6px">
+                                        <div class="form-group form-horizontal form-group required">
+                                            <h:outputLabel id="lblemaill" value="YOUR EMAIL:" class="col-md-4" for="txtemaill"/>
+                                            <h:inputText id="txtemaill" value="#{profileController.register.email}" required="true" requiredMessage="Please fill email." />
+                                            <p:message for="txtemaill" display="icon"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 textBoxMargin6px">
+                                        <div class="form-group form-horizontal form-group required">
+                                            <h:outputLabel value="PASSWORD :" class="col-md-4" for="txtpasss"/>
+                                            <div class="col-md-5">
+                                                <p:password id="txtpasss" value="#{profileController.register.password}" class="col-md-4"  required="true" requiredMessage="Please fill password." />
+                                                <p:message for="txtpasss" display="icon"/>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <div class="col-md-12">
+                                        <div class="col-md-4">
+                                            <p:commandButton value="save: " class="btn btn-block btn-primary col-md-3" process="@this,frmMain" update="frmMain" action="#{profileController.Edit_and_Save()}"></p:commandButton>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+
+
+
+    </ui:define>
+</ui:composition>
+
+

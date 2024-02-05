@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition     xmlns="http://www.w3.org/1999/xhtml"
+                    template="resources/templates/templateCommon.xhtml"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:p="http://primefaces.org/ui"
+                    xmlns:f="http://java.sun.com/jsf/core"
+                    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="navigaion_content">
+        <li><a href="../opdDashboard.xhtml" title="Dashboard"><i class="fa  fa-fw fa-dashboard"></i> <span>Dashboard</span></a></li>
+    </ui:define>
+    <ui:define name="contents">
+        <h:form id="frmToolBar"> 
+            <p:toolbar style="background-color:white;border-color:white">
+                <f:facet name="right">
+
+
+                    <a href="Academics.xhtml"><i class="fa fa-fw fa-refresh" title="Refresh"></i></a>
+                    <span class="ui-separator">
+                          <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                      </span>
+                    <a href="Admin_Dashboard.xhtml"><i class="fa fa-dashboard" title="DashBoard"></i></a>
+                    <!--  <span class="ui-separator">
+                          <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                      </span>
+  
+                      <a href="../opdDashboard.xhtml"><i class="fa fa-fw fa-dashboard" title="Dashboard"></i></a>
+                      <span class="ui-separator" >
+                          <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                      </span>
+                      <a href="../../HomePage.xhtml"><i class="fa fa-home" title="Home Page"></i></a>
+                    -->
+                </f:facet>
+            </p:toolbar>
+        </h:form>
+        <h:form id="frmMain">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary ">
+                        <h:form id="frmPatient">
+                            <p:growl id="growl" showDetail="true" autoUpdate="true" severity="information,fatal"/>  
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-primary ">
+                                        <div class="box-body ">
+
+                                            <div class="col-md-12">
+                                                <div class="form-group col-sm-12 textBoxMargin6px">
+                                                    <div class="form-horizontal col-sm-12"> 
+                                                        <p class="text-center " >
+                                                        <h2> Academics</h2>
+                                                        </p>
+                                                        <div class="col-md-6">
+                                                            <div class="col-md-12">
+                                                                <div class="col-md-12 textBoxMargin6px form-group">
+                                                                    <div class="form-horizontal">
+
+                                                                        <div class="col-md-12 textBoxMargin6px form-group">
+                                                                            <div class="form-horizontal">
+                                                                                <p:outputLabel  value="Faculty" class="control-label col-md-4"/>
+                                                                                <div class="col-sm-8">
+                                                                                    <h:selectOneMenu id="txtFaculty" value="#{StudentController.faculty.facId}"  style="width: 100%" converter="entConverter"
+                                                                                                     valueChangeListener="#{StudentController.FacultyVCL}" >
+                                                                                        <f:selectItem itemValue="" itemLabel="...select Faculty..." noSelectionOption="true"/>
+                                                                                        <f:selectItems value="#{StudentController.facuList}" var="reg" itemValue="#{reg.facId}" itemLabel="#{reg.facuName}"/>
+                                                                                        <p:ajax event="change" process="@this" update="txtdepartment" />
+                                                                                    </h:selectOneMenu>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12 textBoxMargin6px form-group">
+                                                                            <div class="form-horizontal">
+                                                                                <p:outputLabel  value="department" class="control-label col-md-4"/>
+                                                                                <div class="col-sm-8">
+                                                                                    <h:selectOneMenu id="txtdepartment" value="#{StudentController.department.depId}"  style="width: 100%" converter="entConverter"
+                                                                                                     valueChangeListener="#{StudentController.DeptVCL}" >
+                                                                                        <f:selectItem itemValue="" itemLabel="...select Department..." noSelectionOption="true"/>
+                                                                                        <f:selectItems value="#{StudentController.depList}" var="reg" itemValue="#{reg.depId}" itemLabel="#{reg.depName}"/>
+                                                                                        <p:ajax event="change" process="@this,txtdepartment" update="txtdepartment" />
+                                                                                    </h:selectOneMenu>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12 textBoxMargin6px form-group">
+                                                                            <div class="form-horizontal">
+                                                                                <p:outputLabel  value="Study year" class="control-label col-md-4"/>
+                                                                                <div class="col-sm-8">
+                                                                                    <h:selectOneMenu id="txtyear" value="#{StudentController.yearOfstudy.yearId}"  style="width: 100%" converter="entConverter"
+                                                                                                     valueChangeListener="#{StudentController.YearOfStudyVCL}" >
+                                                                                        <f:selectItem itemValue="" itemLabel="...select Year..." noSelectionOption="true"/>
+                                                                                        <f:selectItems value="#{StudentController.yearofstudyList}" var="reg" itemValue="#{reg.yearId}" itemLabel="#{reg.name}"/>
+                                                                                        <p:ajax event="change" process="@this" update="txtyear" />
+                                                                                    </h:selectOneMenu>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12 textBoxMargin6px form-group">
+                                                                            <div class="form-horizontal">
+                                                                                <p:outputLabel  value="Course" class="control-label col-md-4"/>
+                                                                                <div class="col-sm-8">
+                                                                                    <h:selectOneMenu id="txtcourse" value="#{StudentController.course.coId}"  style="width: 100%" converter="entConverter"
+                                                                                                     valueChangeListener="#{StudentController.CourseVCL}" >
+                                                                                        <f:selectItem itemValue="" itemLabel="...select Course..." noSelectionOption="true"/>
+                                                                                        <f:selectItems value="#{StudentController.courseList}" var="reg" itemValue="#{reg.coId}" itemLabel="#{reg.courseName}"/>
+                                                                                        <p:ajax event="change" process="@this" update="txtcourse" />
+                                                                                    </h:selectOneMenu>
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <div class="col-md-12 textBoxMargin6px form-group">
+                                                                                <div class="form-horizontal">
+                                                                                    <h:outputLabel value="" class="control-label col-md-4"/>
+                                                                                    <div class="col-sm-4">
+                                                                                        <p:commandButton id="add" value="Save" process="@this,:frmMain" update=":frmMain"  class="btn btn-block btn-primary" action="#{StudentController.saveAcademics()}"></p:commandButton>
+                                                                                    </div>
+                                                                                    <div class="col-sm-4">
+                                                                                        <p:commandButton id="delete" value="Delete" process="@this,:frmMain" update=":frmMain"  class="btn btn-block btn-danger" action="#{StudentController.deleteAcademics()}"></p:commandButton>
+                                                                                    </div>
+
+
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+
+                        <h:form>
+                            <div class="col-md 12">
+                                <div class="form-group">
+                                    <div class="box box-primary">
+                                        <p:dataTable value="#{StudentController.acadDataModel}" id="academicDt" var="acad" selectionMode="single"
+                                                     paginator="true" paginatorPosition="bottom" rows="10" 
+                                                     rowsPerPageTemplate="5,10,15" class="dataTable"
+                                                     rowIndexVar="num" rowKey="#{acad.dcyId}" selection="#{StudentController.depCoursYear}">
+                                            <p:ajax event="rowSelect" process="@this,academicDt" update="@this,:frmMain" listener="#{StudentController.AcademicsSelection}"/>
+
+                                            <p:column headerText="No." width="50">
+                                                <h:outputText value="#{num+1}"/>
+                                            </p:column>
+                                            <p:column headerText="Departmnet." width="50">
+                                                <h:outputText value="#{acad.depFk.depName}"/>
+                                            </p:column>
+                                            <p:column headerText="Year." width="50">
+                                                <h:outputText value="#{acad.yosFk.name}"/>
+                                            </p:column>
+                                            <p:column headerText="Course." width="50">
+                                                <h:outputText value="#{acad.courseFk.courseName}"/>
+                                            </p:column>
+
+                                        </p:dataTable>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </h:form>
+
+
+                    </div>  
+                </div>
+            </div>
+
+
+
+
+        </h:form>
+
+
+
+
+    </ui:define>
+</ui:composition>
+
+

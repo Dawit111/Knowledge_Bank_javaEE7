@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="resources/templates/template.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="contents">
+
+        <h:form id="main">
+<p:growl id="growl" showDetail="true" autoUpdate="true" severity="information,fatal"/>
+            <h:panelGroup id="pnlmain">
+                <section class="panel panel-info">
+                    <section class="panel-body">
+
+
+                        <div class="col-sm-8">
+
+
+                            <div class="clearfix"></div>
+
+
+
+                            <h:form enctype="multipart/form-data" id="fileid"  >
+
+                                <section class="col-sm-5" >
+
+                                    <p:fileUpload mode="advanced" fileUploadListener="#{fileControl.handlePatientPhotoUpload}" 
+                                                  process="@this" update="@this,:main:fileid"
+                                                  multiple="true"   
+                                                  label="Browse &amp; Upload" 
+                                                  sizeLimit="1000000000000000"   
+                                                  auto="false"
+                                                  immediate="true"
+                                                  dragDropSupport="true"
+                                                  invalidFileMessage="This type of file is not valid"
+                                                  invalidSizeMessage="The size is not Allowed"
+                                                  style="width: 200px" />
+                                </section>
+                            </h:form> 
+                            <div class="col-md-6">
+                                <div class="col-md-12 textBoxMargin6px">
+                                    <div class="form-group form-horizontal form-group required">
+                                        <h:outputLabel id="lblFname" value="YOUR NAME :" class="col-md-6" for="txtFname"/>
+                                        <h:inputText  id="txtFname" value="#{fileControl.filestore.name}"  required="true" requiredMessage="Please fill first name."  />
+                                        <p:message for="txtFname" display="icon"/> 
+                                    </div>
+                                </div>
+                              
+                            </div>
+
+
+                        </div>
+                    </section>
+                </section>
+            </h:panelGroup>
+            <h:panelGroup id="pnlsave">
+                <section class="panel panel-info">
+                    <section class="panel-body">
+                        <div class="col-md-6">
+                            
+                            <p:commandButton id="saveFile" value="save file" action="#{fileControl.saveFile()}"
+                                             process="@this,pnlmain,main" update="pnlmain" ></p:commandButton>
+                        </div>
+                    </section>
+                </section>
+            </h:panelGroup>
+        </h:form>
+    </ui:define>
+</ui:composition>

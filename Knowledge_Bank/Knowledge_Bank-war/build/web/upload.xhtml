@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="resources/templates/templateCommon.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="navigaion_content">
+        <li><a href="Admin_Dashboard.xhtmls" title="Dashboard"><i class="fa  fa-fw fa-dashboard"></i> <span>Dashboard</span></a></li>
+    </ui:define>
+    <ui:define name="contents">
+        <h:form id="frmToolBar"> 
+
+            <p:toolbar>
+                <p:toolbarGroup align="right">
+                    <p:commandButton value="View Files" icon="pi pi-file" styleClass="mr-2" action="#{fileControl.viewFilesPageForAdminOrUser}"/>
+                </p:toolbarGroup>
+                <span class="ui-separator">
+                    <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                </span>
+                <p:toolbarGroup align="left">
+                    <!--                    <a href="Admin_Dashboard.xhtml"><i class="fa fa-fw fa-dashboard" title="Admin Dashboard"></i>Admin Home</a>-->
+                    <p:commandButton value="My Dashboard" icon="pi pi-file" styleClass="mr-2" action="#{fileControl.viewAdminOrUserDashboard()}"/>
+                    <p:commandButton value="Refresh" icon="pi pi-file" styleClass="mr-2" action="#{fileControl.refreshAdminOrUserUploadPage()}"/>
+                </p:toolbarGroup>
+
+            </p:toolbar>
+        </h:form>
+        <h:form id="frmMain">
+            <p:growl id="growl" showDetail="true" autoUpdate="true" severity="information,fatal"/>  
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary ">
+                        <div class="box-body ">
+
+                            <div class="col-md-12">
+                                <div class="form-group col-sm-12 textBoxMargin6px">
+                                    <div class="form-horizontal col-sm-12"> 
+                                        <p class="text-center " >
+                                            <h2> Academics</h2>
+                                        </p>
+                                        <div class="col-md-6">
+                                            <div class="col-md-12">
+                                                <div class="col-md-12 textBoxMargin6px form-group">
+                                                    <div class="form-horizontal">
+
+                                                        <div class="col-md-12 textBoxMargin6px form-group">
+                                                            <div class="form-horizontal">
+                                                                <p:outputLabel  value="FACULTY" class="control-label col-md-4"/>
+                                                                <div class="col-sm-8">
+                                                                    <p:selectOneMenu id="txtFaculty" value="#{fileControl.faculty.facId}"  style="width: 100%" converter="entConverter"
+                                                                                     valueChangeListener="#{fileControl.FacultyVCL}" required="true" requiredMessage="please select faculty" >
+                                                                        <f:selectItem itemValue="" itemLabel="...select Faculty..." noSelectionOption="true"/>
+                                                                        <f:selectItems value="#{fileControl.facuList}" var="reg" itemValue="#{reg.facId}" itemLabel="#{reg.facuName}"/>
+                                                                        <p:ajax event="change" process="@this" update="txtdepartment" />
+                                                                    </p:selectOneMenu>
+                                                                    <p:message for="txtFaculty" display="icon"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 textBoxMargin6px form-group">
+                                                            <div class="form-horizontal">
+                                                                <p:outputLabel  value="DEPARTMENT" class="control-label col-md-4"/>
+                                                                <div class="col-sm-8">
+                                                                    <p:selectOneMenu id="txtdepartment" value="#{fileControl.department.depId}"  style="width: 100%" converter="entConverter"
+                                                                                     valueChangeListener="#{fileControl.DeptVCL}" required="true" requiredMessage="please select department" >
+                                                                        <f:selectItem itemValue="" itemLabel="...select Department..." noSelectionOption="true"/>
+                                                                        <f:selectItems value="#{fileControl.departmentList}" var="reg" itemValue="#{reg.depId}" itemLabel="#{reg.depName}"/>
+                                                                        <p:ajax event="change" process="@this,txtdepartment" update="txtdepartment" />
+                                                                    </p:selectOneMenu>
+                                                               <p:message for="txtdepartment" display="icon"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 textBoxMargin6px form-group">
+                                                            <div class="form-horizontal">
+                                                                <p:outputLabel  value="STUDY-YEAR" class="control-label col-md-4"/>
+                                                                <div class="col-sm-8">
+                                                                    <p:selectOneMenu id="txtyear" value="#{fileControl.yearOfStudy.yearId}"  style="width: 100%" converter="entConverter"
+                                                                                     valueChangeListener="#{fileControl.YearOfStudyVCL}" required="true" requiredMessage="please select year" >
+                                                                        <f:selectItem itemValue="" itemLabel="...select Year..." noSelectionOption="true"/>
+                                                                        <f:selectItems value="#{fileControl.yearList}" var="reg" itemValue="#{reg.yearId}" itemLabel="#{reg.name}"/>
+                                                                        <p:ajax event="change" process="@this" update="txtyear,txtcourse" />
+                                                                    </p:selectOneMenu>
+                                                               <p:message for="txtyear" display="icon"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 textBoxMargin6px form-group">
+                                                            <div class="form-horizontal">
+                                                                <p:outputLabel  value="COURSE" class="control-label col-md-4"/>
+                                                                <div class="col-sm-8">
+                                                                    <p:selectOneMenu id="txtcourse" value="#{fileControl.depCoursYear.courseFk.coId}"  style="width: 100%" converter="entConverter"
+                                                                                     valueChangeListener="#{fileControl.CourseVCL}" required="true" requiredMessage="please select course" >
+                                                                        <f:selectItem itemValue="" itemLabel="...select Course..." noSelectionOption="true"/>
+                                                                        <f:selectItems value="#{fileControl.depyrList}" var="reg" itemValue="#{reg.courseFk.coId}" itemLabel="#{reg.courseFk.courseName}"/>
+                                                                        <p:ajax event="change" process="@this" update="txtcourse" />
+                                                                    </p:selectOneMenu>
+                                                               <p:message for="txtcourse" display="icon"/>
+                                                                </div>
+
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <h:panelGroup id="regpnl">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-primary ">
+                            <div class="box-body ">
+
+                                <div class="col-md-12">
+                                    <div class="form-group col-sm-12 textBoxMargin6px">
+                                        <div class="form-horizontal col-sm-12"> 
+                                            <p class="text-center " >
+                                                <h2> FILE UPLOAD</h2>
+                                            </p>
+                                            <div class="col-md-12"><h:outputLabel value=""/></div>
+                                            <div class="col-md-12"><h:outputLabel value=""/></div>
+                                            <div class="col-md-12"><h:outputLabel value=""/></div>
+                                            <div class="col-md-12"><h:outputLabel value=""/></div>
+                                            <div class="col-md-6">
+
+                                                <div class="col-md-12 textBoxMargin6px form-group">
+                                                    <div class="form-horizontal">
+                                                        <h:form enctype="multipart/form-data" id="fileid"  >
+
+                                                            <section class="col-sm-12 col-md-11" >
+
+                                                                <p:fileUpload mode="advanced" fileUploadListener="#{fileControl.handlePatientPhotoUpload}" 
+                                                                              process="@this" update="@this,:frmMain:fileid"
+                                                                              multiple="true"   
+                                                                              label="Browse &amp; Hold" 
+                                                                              sizeLimit="1000000000000000"   
+                                                                              auto="false"
+                                                                              immediate="true"
+                                                                              dragDropSupport="true"
+                                                                              invalidFileMessage="This type of file is not valid"
+                                                                              invalidSizeMessage="The size is not Allowed"
+                                                                              style="width: auto"
+                                                                               required="true" requiredMessage="please choose file"
+                                                                               id="fileUpld"/>
+                                                                <p:message for="fileUpld" display="icon"/>
+                                                            </section>
+                                                        </h:form>  
+                                                    </div>
+                                                </div>
+
+
+                                                <h:panelGroup id="pnlfile">
+                                                    <div class="col-md-12">
+
+
+                                                        <div class="col-md-12 textBoxMargin6px form-group">
+                                                            <div class="form-horizontal">
+                                                                <p:outputLabel  value="DATE:" class="control-label col-md-3"/>
+                                                                <div class="col-sm-8">
+                                                                    <p:inputText placeholder="click here to popup a calendar" id="txtdept" value="#{fileControl.fileStore.dateOfUpload}"
+                                                                                 onclick="displayCalendar('frmMain:txtdept', 'frmMain:txtdept')"
+                                                                                required="true" requiredMessage="please select date"  ></p:inputText>
+                                                                    <p:message for="txtdept" display="icon"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 textBoxMargin6px form-group">
+                                                            <div class="form-horizontal">
+                                                                <p:outputLabel  value="DESCRIPTION:" class="control-label col-md-3"/>
+                                                                <div class="col-sm-8">
+                                                                    <h:inputTextarea class="col-md-12 col-lg-12 col-sm-12 col-xs-12" rows="4" cols="42" id="txtlname" value="#{fileControl.fileStore.description}"
+                                                                                      required="true" requiredMessage="please fill description"></h:inputTextarea>
+                                                                    <p:message for="txtlname" display="icon"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </h:panelGroup>
+                                                <div class="col-md-12 textBoxMargin6px form-group">
+                                                    <div class="form-horizontal">
+                                                        <h:outputLabel value="" class="control-label col-md-3"/>
+                                                        <div class="col-sm-4">
+                                                            <p:commandButton id="add" process="@this,:frmMain:pnlfile" update=":frmMain,:frmMain:regpnl" value="Upload" class="btn btn-block btn-primary" action="#{fileControl.saveFile}"></p:commandButton>
+                                                        </div>
+
+                                                        <!-- <div class="col-sm-4">
+                                                             <p:commandButton id="del" process="@this,:frmMain:regpnl" update=":frmMain:regpnl" value="CLEAR" class="btn btn-block btn-danger" action="#/{fileControl.clear()}"></p:commandButton>
+                                                         </div> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h:panelGroup>
+
+        </h:form>
+
+
+
+
+    </ui:define>
+</ui:composition>
+
+

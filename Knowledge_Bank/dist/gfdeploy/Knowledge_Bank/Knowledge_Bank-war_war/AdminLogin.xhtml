@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="resources/templates/templateCommon.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="contents">
+        <h:form id="frmMain">
+            <p:growl id="growl" showDetail="true" autoUpdate="true" severity="information,fatal"/>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary ">
+                        <h:panelGroup id="pnladmin">
+                            <div class="col-md-12">
+
+                                <div class="form-group col-sm-12 textBoxMargin6px">
+                                    <div class="form-horizontal col-sm-12"> 
+                                        <div class="col-md-6">
+                                            <div class="col-md-12 textBoxMargin6px">
+                                                <div class="form-group form-horizontal form-group required"><br></br><br></br>
+                                                    
+                                                    <h:outputLabel value="PASSWORD  :" class="col-md-4" for="txtpass"/>
+                                                    <div class="col-md-8">
+                                                        <p:password id="txtpass"  class="col-md-12"  value="#{logincontrol.password}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="col-md-4">
+                                                    <h:outputLabel class="col-md-12"  value=""/>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p:commandButton value="LOGIN " class="btn btn-block btn-primary col-md-3" process="@this,pnladmin" update="pnladmin" action="#{logincontrol.verifyAdmin()}"></p:commandButton>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:panelGroup>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
+

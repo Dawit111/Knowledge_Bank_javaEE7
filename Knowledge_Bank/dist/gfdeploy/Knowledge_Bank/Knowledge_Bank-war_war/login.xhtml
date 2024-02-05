@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="resources/templates/template_LoginPage.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <!--<ui:define name="navigaion_content">
+        <li><a href="../opdDashboard.xhtml" title="Dashboard"><i class="fa  fa-fw fa-dashboard"></i> <span>Dashboard</span></a></li>
+    </ui:define>-->
+    <ui:define name="contents">
+        <h:form id="frmMain">
+            <p:growl id="growl" showDetail="true" autoUpdate="true" severity="information,fatal"/>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary ">
+                        <section class="panel panel-info"  >
+                            <section class="panel-body" >
+
+                                <h:panelGroup id="pnluser">
+                                    <div class="col-md-12">
+                                        <div class="col-md-6">
+                                            <div class="col-md-12 textBoxMargin6px">
+                                                <div class="form-group form-horizontal form-group required">
+                                                    <h:outputLabel value="USER NAME:" class="col-md-4" for="txtun"/>
+                                                    <div class="col-md-8">
+                                                        <p:inputText id="txtun" value="#{logincontrol.useraccount.username}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 textBoxMargin6px">
+                                                <div class="form-group form-horizontal form-group required">
+                                                    <h:outputLabel value="PASSWORD  :" class="col-md-4" for="txtpass"/>
+                                                    <div class="col-md-8">
+                                                        <p:password id="txtpass"  class="col-md-12"  value="#{logincontrol.password}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="col-md-4">
+                                                    <h:outputLabel class="col-md-12"  value=""/>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p:commandButton value="LOGIN " class="btn btn-block btn-primary col-md-3" process="@this,:frmMain" update="pnluser" action="#{logincontrol.verify}"></p:commandButton>
+                                                </div>
+                                                
+                                                <div class="col-md-12">
+                                                    don't have account ?<h:link value=' click here' outcome="UserAccount.xhtml" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
+                            </section>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+
+
+
+    </ui:define>
+</ui:composition>
+
+

@@ -1,0 +1,233 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition     xmlns="http://www.w3.org/1999/xhtml"
+                    template="resources/templates/templateCommon.xhtml"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:p="http://primefaces.org/ui"
+                    xmlns:f="http://java.sun.com/jsf/core"
+                    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<!--    <ui:define name="navigaion_content">
+        <li><a href="../opdDashboard.xhtml" title="Dashboard"><i class="fa  fa-fw fa-dashboard"></i> <span>Dashboard</span></a></li>
+    </ui:define>-->
+    <ui:define name="contents">
+        <h:form id="frmToolBar"> 
+            <!--            <p:toolbar style="background-color:white;border-color:white">
+                            <f:facet name="right">
+                                <p:commandButton id="btnNew" value="Upload File" action="#/{fileControl.uploadPage()}" 
+                                                 style="background-color: whitesmoke; border-color: white" 
+                                                 icon="#/{fileControl.icone}" validateClient="true" 
+                                                 process="@this" update="@this,:frmMain,:frmToolBar"
+                                                 title="upload" />
+                         
+                                <a href="admin_home_page.xhtml"><i class="fa fa-fw fa-refresh" title="Refresh"></i></a>
+            
+                                  <span class="ui-separator">
+                                      <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                                  </span>
+              
+                                  <a href="../opdDashboard.xhtml"><i class="fa fa-fw fa-dashboard" title="Dashboard"></i></a>
+                                  <span class="ui-separator" >
+                                      <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                                  </span>
+                                  <a href="../../HomePage.xhtml"><i class="fa fa-home" title="Home Page"></i></a>
+                                
+                            </f:facet>
+                        </p:toolbar>-->
+
+            <p:toolbar>
+                <p:toolbarGroup align="right">
+                    <p:commandButton value="Upload File" icon="pi pi-file" styleClass="mr-2" action="#{fileControl.uploadPage()}"/>
+                </p:toolbarGroup>
+                <span class="ui-separator">
+                    <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                </span>
+                <p:toolbarGroup align="left">
+                    <!--                    <a href="Admin_Dashboard.xhtml"><i class="fa fa-fw fa-dashboard" title="Admin Dashboard"></i>Admin Home</a>-->
+                    <p:commandButton value="My Dashboard" icon="pi pi-file" styleClass="mr-2" action="Admin_Dashboard.xhtml"/>
+                    <p:commandButton value="Refresh" icon="pi pi-file" styleClass="mr-2" action="#{fileControl.downloadPage()}"/>
+                </p:toolbarGroup>
+
+            </p:toolbar>
+        </h:form>
+        <h:form id="frmDownload">
+            <p:growl id="growl" showDetail="true" autoUpdate="true" severity="information,fatal"/>  
+            <h:panelGroup id="regpn0">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-primary ">
+                            <div class="box-body ">
+
+                                <div class="col-md-12">
+                                    <div class="form-group col-sm-12 textBoxMargin6px">
+                                        <div class="form-horizontal col-sm-12"> 
+                                            <p class="text-center " >
+                                                <h2> Search with Academics</h2>
+                                            </p>
+                                            <div class="col-md-6">
+                                                <div class="col-md-12">
+                                                    <div class="col-md-12 textBoxMargin6px form-group">
+                                                        <div class="form-horizontal">
+
+                                                            <div class="col-md-12 textBoxMargin6px form-group">
+                                                                <div class="form-horizontal">
+                                                                    <p:outputLabel  value="FACULTY" class="control-label col-md-4"/>
+                                                                    <div class="col-sm-8">
+                                                                        <p:selectOneMenu id="txtFaculty" value="#{fileControl.faculty.facId}"  style="width: 100%" converter="entConverter"
+                                                                                         valueChangeListener="#{fileControl.FacultyVCL}" >
+                                                                            <f:selectItem itemValue="" itemLabel="...select Faculty..." noSelectionOption="true"/>
+                                                                            <f:selectItems value="#{fileControl.facuList}" var="reg" itemValue="#{reg.facId}" itemLabel="#{reg.facuName}"/>
+                                                                            <p:ajax event="change" process="@this" update="txtdepartment" />
+                                                                        </p:selectOneMenu>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 textBoxMargin6px form-group">
+                                                                <div class="form-horizontal">
+                                                                    <p:outputLabel  value="DEPARTMENT" class="control-label col-md-4"/>
+                                                                    <div class="col-sm-8">
+                                                                        <p:selectOneMenu id="txtdepartment" value="#{fileControl.department.depId}"  style="width: 100%" converter="entConverter"
+                                                                                         valueChangeListener="#{fileControl.DeptVCL}" >
+                                                                            <f:selectItem itemValue="" itemLabel="...select Department..." noSelectionOption="true"/>
+                                                                            <f:selectItems value="#{fileControl.departmentList}" var="reg" itemValue="#{reg.depId}" itemLabel="#{reg.depName}"/>
+                                                                            <p:ajax event="change" process="@this,txtdepartment" update="frmDownload:regpnl" />
+                                                                        </p:selectOneMenu>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 textBoxMargin6px form-group">
+                                                                <div class="form-horizontal">
+                                                                    <p:outputLabel  value="STUDY-YEAR" class="control-label col-md-4"/>
+                                                                    <div class="col-sm-8">
+                                                                        <p:selectOneMenu id="txtyear" value="#{fileControl.yearOfStudy.yearId}"  style="width: 100%" converter="entConverter"
+                                                                                         valueChangeListener="#{fileControl.YearOfStudyVCL}" >
+                                                                            <f:selectItem itemValue="" itemLabel="...select Year..." noSelectionOption="true"/>
+                                                                            <f:selectItems value="#{fileControl.yearList}" var="reg" itemValue="#{reg.yearId}" itemLabel="#{reg.name}"/>
+                                                                            <p:ajax event="change" process="@this" update="frmDownload,regpnl,txtyear,txtcourse" />
+                                                                        </p:selectOneMenu>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 textBoxMargin6px form-group">
+                                                                <div class="form-horizontal">
+                                                                    <p:outputLabel  value="COURSE" class="control-label col-md-4"/>
+                                                                    <div class="col-sm-8">
+                                                                        <p:selectOneMenu id="txtcourse" value="#{fileControl.depCoursYear.courseFk.coId}"  style="width: 100%" converter="entConverter"
+                                                                                         valueChangeListener="#{fileControl.CourseVCL}" >
+                                                                            <f:selectItem itemValue="" itemLabel="...select Course..." noSelectionOption="true"/>
+                                                                            <f:selectItems value="#{fileControl.depyrList}" var="reg" itemValue="#{reg.courseFk.coId}" itemLabel="#{reg.courseFk.courseName}"/>
+                                                                            <p:ajax event="change" process="@this" update="frmDownload:regpnl" />
+                                                                        </p:selectOneMenu>
+                                                                    </div>
+
+                                                                </div>
+                                                                <!--                                                                            <div class="col-md-12 textBoxMargin6px form-group">
+                                                                                                                                                <div class="form-horizontal">
+                                                                                                                                                    <h:outputLabel value="" class="control-label col-md-4"/>
+                                                                                                                                                    <div class="col-sm-4">
+                                                                                                                                                        <p:commandButton id="add" value="save" process="@this,:frmMain" update=":frmMain"  class="btn btn-block btn-primary" action="#/{fileControl.saveAcademics()}"></p:commandButton>
+                                                                                                                                                    </div>
+                                                                
+                                                                
+                                                                                                                                                </div>
+                                                                                                                                            </div>-->
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h:panelGroup>
+
+
+            <h:panelGroup id="regpnl">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-primary ">
+                            <div class="box-body">
+
+                                <div class="col-md-12">
+                                    <div class="form-group col-sm-12 textBoxMargin6px">
+                                        <div class="form-horizontal col-sm-12"> 
+                                            <p class="text-center " >
+                                                <h2> FILE Download</h2>
+                                            </p>
+                                            <div class="col-md-6">
+                                                <div class="col-md-12">
+                                                    <div class="col-md-12 textBoxMargin6px form-group">
+                                                        <div class="form-horizontal">
+                                                            <p:panelGrid columns="1" style="float: left;"> 
+                                                                <p:dataTable id="tblSavedDoc"  var="currentRow" rowIndexVar="num" value="#{fileControl.allFile}"
+                                                                             paginator="true" selectionMode="single" rowKey="#{currentRow.fileId}"
+                                                                             selection="#{fileControl.fileStore}" paginatorPosition="bottom"
+                                                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                             rows="10" rowsPerPageTemplate="5,10,15,100" style="border: none; font-family: 'Lucida Sans'; font-size: 11px; font-style: normal; font-weight: lighter; width:1000px">
+                                                                    <p:ajax event="rowSelect" listener="#{fileControl.onRowSelect}" process="@this,tblSavedDoc" update="tblSavedDoc"/>
+                                                                    <p:column headerText="No." width="50">
+                                                                        <h:outputText value="#{num+1}"/>
+                                                                    </p:column>
+                                                                    <p:column id="docNames" headerText="File Name"> 
+                                                                        <h:outputText id="txtname" value="#{currentRow.name}" style="text-align: left;"/>
+                                                                    </p:column>
+                                                                    <p:column id="docTypes" headerText="File Type"> 
+                                                                        <h:outputText id="txttype" value="#{currentRow.type}" style="text-align: left;"/>
+                                                                    </p:column>
+                                                                    <p:column id="docDescription" headerText="Description"> 
+                                                                        <h:outputText id="txtdesc" value="#{currentRow.description}" style="text-align: left;"/>
+                                                                    </p:column>
+                                                                    <p:column id="docDate" headerText="Date Of Upload"> 
+                                                                        <h:outputText id="txtdate" value="#{currentRow.dateOfUpload}" style="text-align: left;"/>
+                                                                    </p:column>
+                                                                    <p:column id="docDepar" headerText="Department"> 
+                                                                        <h:outputText id="txtdept" value="#{currentRow.depCourse.depFk.depName}" style="text-align: left;"/>
+                                                                    </p:column>
+                                                                    <p:column id="docYear" headerText="Study year"> 
+                                                                        <h:outputText id="txtyear" value="#{currentRow.depCourse.yosFk.name}" style="text-align: left;"/>
+                                                                    </p:column>
+                                                                    <p:column id="docCourse" headerText="Course"> 
+                                                                        <h:outputText id="txtcourse" value="#{currentRow.depCourse.courseFk.courseName}" style="text-align: left;"/>
+                                                                    </p:column>
+                                                                    <p:column headerText="Download">
+                                                                        <p:commandButton process="@this,tblSavedDoc" update="tblSavedDoc" icon="ui-icon-arrowthickstop-1-s" ajax="false" immediate="true">
+                                                                            <p:fileDownload value="#{fileControl.adminSideFiles}"/>
+                                                                        </p:commandButton>
+                                                                    </p:column> 
+                                                                    <p:column id="decDelete" headerText="Delete">
+                                                                        <p:commandButton process="@this,tblSavedDoc" update="tblSavedDoc" value="delete" icon="ui-icon-delete" styleClass="ui-button-danger"
+                                                                                         action="#{fileControl.deleteFile}"/>
+                                                                    </p:column>
+                                                                </p:dataTable>
+                                                            </p:panelGrid>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h:panelGroup>
+
+        </h:form>
+
+
+
+
+    </ui:define>
+</ui:composition>
+
+

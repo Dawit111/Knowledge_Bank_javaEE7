@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="resources/templates/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="navigaion_content">
+        <li><a href="../opdDashboard.xhtml" title="Dashboard"><i class="fa  fa-fw fa-dashboard"></i> <span>Dashboard</span></a></li>
+    </ui:define>
+    <ui:define name="contents">
+        <h:form id="frmMain">
+            <h:link value="back to login" outcome="login.xhtml"></h:link>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary ">
+                        <section class="panel panel-info"  >
+                            <section class="panel-body" >
+                                <p:growl id="growl" showDetail="true" autoUpdate="true" severity="information,fatal"/>  
+                                <div class="col-md-6">
+                                    <div class="col-md-12 textBoxMargin6px">
+                                        <div class="form-group form-horizontal form-group required">
+                                            <h:outputLabel id="lblId" value="Id No :" class="col-md-4" for="txtId"/>
+                                            <h:inputText  id="txtId" value="#{studController.register.id}"  required="true" requiredMessage="Please fill id."  />
+                                            <p:message for="txtId" display="icon"/> 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 textBoxMargin6px">
+                                        <div class="form-group form-horizontal form-group required">
+                                            <h:outputLabel id="lblFname" value="YOUR NAME :" class="col-md-4" for="txtFname"/>
+                                            <h:inputText  id="txtFname" value="#{studController.register.fname}"  required="true" requiredMessage="Please fill first name."  />
+                                            <p:message for="txtFname" display="icon"/> 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 textBoxMargin6px">
+                                        <div class="form-group form-horizontal form-group required">
+                                            <h:outputLabel id="lblLname" value="FATHER NAME :" class="col-md-4" for="txtLname"/>
+                                            <h:inputText id="txtLname" value="#{studController.register.lname}"  required="true" requiredMessage="Please fill last name."  />
+                                            <p:message for="txtLname" display="icon"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 textBoxMargin6px">
+                                        <div class="form-group form-horizontal form-group required">
+                                            <h:outputLabel id="lbldept" value="DEPARTMENT :" class="col-md-4" for="txtDept"/>
+                                            <h:inputText id="txtDept" value="#{studController.register.department}" required="true" requiredMessage="Please fill department." />
+                                            <p:message for="txtDept" display="icon"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 textBoxMargin6px">
+                                        <div class="form-group form-horizontal form-group required">
+                                            <h:outputLabel id="lblemail" value="YOUR EMAIL:" class="col-md-4" for="txtemail"/>
+                                            <h:inputText id="txtemail" value="#{studController.register.email}" required="true" requiredMessage="Please fill email." />
+                                            <p:message for="txtemail" display="icon"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 textBoxMargin6px">
+                                        <div class="form-group form-horizontal form-group required">
+                                            <h:outputLabel value="PASSWORD :" class="col-md-4" for="txtpass"/>
+                                            <div class="col-md-5">
+                                                <p:password id="txtpass" value="#{studController.register.password}" class="col-md-4"  required="true" requiredMessage="Please fill password." />
+                                                <p:message for="txtpass" display="icon"/>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="col-md-4">
+                                            <p:commandButton value="save: " class="btn btn-block btn-primary col-md-3" process="@this,frmMain" update="frmMain" action="#{studController.Edit_and_Save()}"></p:commandButton>
+                                            <p:commandButton value="clear" class="btn btn-block btn-primary col-md-3" process="@this,frmMain" update="frmMain" action="#{studController.clear()}"></p:commandButton>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+
+
+
+    </ui:define>
+</ui:composition>
+
+

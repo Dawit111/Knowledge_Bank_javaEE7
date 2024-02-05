@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Knowledge_Bank (5).iml" filepath="$PROJECT_DIR$/.idea/Knowledge_Bank (5).iml" />
+      <module fileurl="file://$PROJECT_DIR$/Knowledge_Bank/Knowledge_Bank-ejb/src/Knowledge_Bank-ejb.iml" filepath="$PROJECT_DIR$/Knowledge_Bank/Knowledge_Bank-ejb/src/Knowledge_Bank-ejb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Knowledge_Bank/Knowledge_Bank-war/src/java/Knowledge_Bank-war.iml" filepath="$PROJECT_DIR$/Knowledge_Bank/Knowledge_Bank-war/src/java/Knowledge_Bank-war.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Knowledge_Bank/Knowledge_Bank-war/src/Knowledge_Bank-war1.iml" filepath="$PROJECT_DIR$/Knowledge_Bank/Knowledge_Bank-war/src/Knowledge_Bank-war1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Knowledge_Bank/Knowledge_Bank-ejb/build/build.iml" filepath="$PROJECT_DIR$/Knowledge_Bank/Knowledge_Bank-ejb/build/build.iml" />
+    </modules>
+  </component>
+</project>

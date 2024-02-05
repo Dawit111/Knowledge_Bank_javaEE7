@@ -1,0 +1,258 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    template="resources/templates/templateCommon.xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:define name="contents">
+        <div class="row">
+            <h:form id="frmToolBar"> 
+                <!--            <p:toolbar style="background-color:white;border-color:white">
+                                <f:facet name="right">
+                                    <p:commandButton id="btnNew" value="Upload File" action="#/{fileControl.uploadPage()}" 
+                                                     style="background-color: whitesmoke; border-color: white" 
+                                                     icon="#/{fileControl.icone}" validateClient="true" 
+                                                     process="@this" update="@this,:frmMain,:frmToolBar"
+                                                     title="upload" />
+                             
+                                    <a href="admin_home_page.xhtml"><i class="fa fa-fw fa-refresh" title="Refresh"></i></a>
+                
+                                      <span class="ui-separator">
+                                          <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                                      </span>
+                  
+                                      <a href="../opdDashboard.xhtml"><i class="fa fa-fw fa-dashboard" title="Dashboard"></i></a>
+                                      <span class="ui-separator" >
+                                          <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                                      </span>
+                                      <a href="../../HomePage.xhtml"><i class="fa fa-home" title="Home Page"></i></a>
+                                    
+                                </f:facet>
+                            </p:toolbar>-->
+
+                <p:toolbar>
+                    <p:toolbarGroup align="left">
+                        <p:commandButton value="My Dashboard" icon="pi pi-file" styleClass="mr-2" action="#{fileControl.viewAdminOrUserDashboard()}"/>
+                        <p:commandButton value="Refresh" icon="pi pi-file" styleClass="mr-2" action="#{fileControl.refreshUserHomePage()}"/>
+                    </p:toolbarGroup>
+                    <p:toolbarGroup align="right">
+                        <p:commandButton value="Upload File" icon="pi pi-file" styleClass="mr-2" action="#{fileControl.uploadPage()}"/>
+                    </p:toolbarGroup>
+                    <span class="ui-separator">
+                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                    </span>
+                    <p:toolbarGroup align="right">
+                        <p:commandButton value="Discussion" icon="pi pi-file" styleClass="mr-2" action="#{fileControl.discussionPage()}"/>
+                    </p:toolbarGroup>
+                    <span class="ui-separator">
+                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                    </span>
+                    <!--                <p:toolbarGroup align="left">
+                                        <a href="userHomePage.xhtml"><i class="fa fa-fw fa-dashboard" title="User Home Page"></i>User Home</a>
+                                    </p:toolbarGroup>-->
+
+                </p:toolbar>
+            </h:form>
+
+            <h:form id="formFile">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-primary ">
+                            <div class="box-body ">
+
+                                <div class="col-md-12">
+                                    <div class="form-group col-sm-12 textBoxMargin6px">
+                                        <div class="form-horizontal col-sm-12"> 
+                                            <p class="text-center " >
+                                                <h2> Filter By Academics</h2>
+                                            </p>
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    <div class="col-md-12 textBoxMargin6px form-group">
+                                                        <div class="form-horizontal">
+
+                                                            <div class="col-md-12 textBoxMargin6px form-group">
+                                                                <div class="form-horizontal">
+                                                                    <p:outputLabel  value="FACULTY :" class="control-label col-md-4"/>
+                                                                    <div class="col-sm-8">
+                                                                        <p:selectOneMenu id="txtFaculty" value="#{fileControl.faculty.facId}"  style="width: 100%" converter="entConverter"
+                                                                                         valueChangeListener="#{fileControl.FacultyVCL}" >
+                                                                            <f:selectItem itemValue="" itemLabel="...select Faculty..." noSelectionOption="true"/>
+                                                                            <f:selectItems value="#{fileControl.facuList}" var="reg" itemValue="#{reg.facId}" itemLabel="#{reg.facuName}"/>
+                                                                            <p:ajax event="change" process="@this" update="txtdepartment" />
+                                                                        </p:selectOneMenu>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 textBoxMargin6px form-group">
+                                                                <div class="form-horizontal">
+                                                                    <p:outputLabel  value="DEPARTMENT :" class="control-label col-md-4"/>
+                                                                    <div class="col-sm-8">
+                                                                        <p:selectOneMenu id="txtdepartment" value="#{fileControl.department.depId}"  style="width: 100%" converter="entConverter"
+                                                                                         valueChangeListener="#{fileControl.DeptVCL}" >
+                                                                            <f:selectItem itemValue="" itemLabel="...select Department..." noSelectionOption="true"/>
+                                                                            <f:selectItems value="#{fileControl.departmentList}" var="reg" itemValue="#{reg.depId}" itemLabel="#{reg.depName}"/>
+                                                                            <p:ajax event="change" process="@this,txtdepartment" update="formFile:regpnl" />
+                                                                        </p:selectOneMenu>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 textBoxMargin6px form-group">
+                                                                <div class="form-horizontal">
+                                                                    <p:outputLabel  value="STUDY-YEAR :" class="control-label col-md-4"/>
+                                                                    <div class="col-sm-8">
+                                                                        <p:selectOneMenu id="txtyear" value="#{fileControl.yearOfStudy.yearId}"  style="width: 100%" converter="entConverter"
+                                                                                         valueChangeListener="#{fileControl.YearOfStudyVCL}" >
+                                                                            <f:selectItem itemValue="" itemLabel="...select Year..." noSelectionOption="true"/>
+                                                                            <f:selectItems value="#{fileControl.yearList}" var="reg" itemValue="#{reg.yearId}" itemLabel="#{reg.name}"/>
+                                                                            <p:ajax event="change" process="@this" update="formFile,regpnl,txtyear,txtcourse" />
+                                                                        </p:selectOneMenu>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 textBoxMargin6px form-group">
+                                                                <div class="form-horizontal">
+                                                                    <p:outputLabel  value="COURSE :" class="control-label col-md-4"/>
+                                                                    <div class="col-sm-8">
+                                                                        <p:selectOneMenu id="txtcourse" value="#{fileControl.depCoursYear.courseFk.coId}"  style="width: 100%" converter="entConverter"
+                                                                                         valueChangeListener="#{fileControl.CourseVCL}" >
+                                                                            <f:selectItem itemValue="" itemLabel="...select Course..." noSelectionOption="true"/>
+                                                                            <f:selectItems value="#{fileControl.depyrList}" var="reg" itemValue="#{reg.courseFk.coId}" itemLabel="#{reg.courseFk.courseName}"/>
+                                                                            <p:ajax event="change" process="@this" update="formFile:regpnl" />
+                                                                        </p:selectOneMenu>
+                                                                    </div>
+
+                                                                </div>
+                                                                <!--                                                                            <div class="col-md-12 textBoxMargin6px form-group">
+                                                                                                                                                <div class="form-horizontal">
+                                                                                                                                                    <h:outputLabel value="" class="control-label col-md-4"/>
+                                                                                                                                                    <div class="col-sm-4">
+                                                                                                                                                        <p:commandButton id="add" value="save" process="@this,:frmMain" update=":frmMain"  class="btn btn-block btn-primary" action="#/{fileControl.saveAcademics()}"></p:commandButton>
+                                                                                                                                                    </div>
+                                                                
+                                                                
+                                                                                                                                                </div>
+                                                                                                                                            </div>-->
+
+                                                            </div>
+                                                            <div class="col-md-12"><p:outputLabel value=""/></div>
+                                                            <div class="col-md-12"><p:outputLabel value=""/></div>
+                                                            <div class="col-md-12"><p:outputLabel value=""/></div>
+                                                            <div class="form-group col-sm-12 textBoxMargin6px">
+                                                                <div class="form-horizontal">   
+                                                                    <p:outputLabel  value="" class="control-label col-md-4"/>
+                                                                    <div class="col-sm-8">
+                                                                        <p:inputTextarea placeholder="Search using the file name" id="txtname" value="#{fileControl.fileStore.name}"></p:inputTextarea> 
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 textBoxMargin6px form-group">
+                                                                <div class="form-horizontal">
+                                                                    <p:outputLabel value="" class="control-label col-md-4"/>
+                                                                    <div class="col-sm-3">
+                                                                        <p:commandButton id="btnsearch" process="@this,txtname" update="formFile:regpnl" value="Search" class="btn btn-block btn-primary" action="#{fileControl.searchByFileName()}"></p:commandButton>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <h:panelGroup id="regpnl">
+                    <p:dataScroller id="tblSavedDoc" value="#{fileControl.fileStoreDataModel}" var="product" chunkSize="10">
+
+
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="box box-primary ">
+                                    <div class="box-body ">
+                                        <div class="col-md-12 textBoxMargin6px form-group">
+                                            <div class="form-horizontal">
+                                                <div class="col-md-2">
+                                                    <img src="resources/photos/FIleIcon.jpg" alt="" width="300" height="300"/>
+                                                    <h:outputLabel value="" class="control-label col-md-12"/>
+                                                    <div class="col-md-12 textBoxMargin6px form-group">
+                                                        <div class="form-horizontal">
+                                                            <h:outputLabel value="" class="control-label col-md-2"/>
+                                                            <div class="col-sm-8">
+                                                                <p:commandButton process="@this,tblSavedDoc" update="tblSavedDoc" icon="ui-icon-arrowthickstop-1-s" ajax="false" immediate="true"  value="Download">
+                                                                    <p:fileDownload value="#{fileControl.files}"/>
+                                                                </p:commandButton></div></div></div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <div class="col-md-12 textBoxMargin6px form-group">
+                                                        <div class="form-horizontal">
+                                                            <h:outputLabel value="FILE NAME :" class="control-label col-md-4"/>
+                                                            <div class="col-sm-8">
+                                                                <h:outputText value="#{product.name}"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 textBoxMargin6px form-group">
+                                                        <div class="form-horizontal">
+                                                            <h:outputLabel value="FILE TYPE :" class="control-label col-md-4"/>
+                                                            <div class="col-sm-8">
+                                                                <h:outputText value="#{product.type}"/></div></div></div>
+                                                    <div class="col-md-12 textBoxMargin6px form-group">
+                                                        <div class="form-horizontal">
+                                                            <h:outputLabel value="DESCRIPTION :" class="control-label col-md-4"/>
+                                                            <div class="col-sm-8">
+                                                                <h:inputTextarea class="col-md-12 col-sm-12 col-xs-12" cols="10" rows="4" value="#{product.description}" disabled="true"/></div></div></div>
+                                                    <div class="col-md-12 textBoxMargin6px form-group">
+                                                        <div class="form-horizontal">
+                                                            <h:outputLabel value="DEPARTMENT :" class="control-label col-md-4"/>
+                                                            <div class="col-sm-8">
+                                                                <h:outputText value="#{product.depCourse.depFk.depName}"/></div></div></div>
+                                                    <div class="col-md-12 textBoxMargin6px form-group">
+                                                        <div class="form-horizontal">
+                                                            <h:outputLabel value="STUDY-YEAR :" class="control-label col-md-4"/>
+                                                            <div class="col-sm-8">
+                                                                <h:outputText value="#{product.depCourse.yosFk.name}"/></div></div></div>
+                                                    <div class="col-md-12 textBoxMargin6px form-group">
+                                                        <div class="form-horizontal">
+                                                            <h:outputLabel value="COURSE :" class="control-label col-md-4"/>
+                                                            <div class="col-sm-8">
+                                                                <h:outputText value="#{product.depCourse.courseFk.courseName}"/></div></div></div>
+                                                    <div class="col-md-12 textBoxMargin6px form-group">
+                                                        <div class="form-horizontal">
+                                                            <h:outputLabel value="UPLOADED-BY :" class="control-label col-md-4"/>
+                                                            <div class="col-sm-8">
+                                                                <h:outputText value="#{product.userFk.username}"/></div></div></div>
+                                                    <div class="col-md-12 textBoxMargin6px form-group">
+                                                        <div class="form-horizontal">
+                                                            <h:outputLabel value="UPLOAD-DATE :" class="control-label col-md-4"/>
+                                                            <div class="col-sm-8">
+                                                                <h:outputText value="#{product.dateOfUpload}"/></div></div></div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </p:dataScroller>
+                </h:panelGroup>
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>
+

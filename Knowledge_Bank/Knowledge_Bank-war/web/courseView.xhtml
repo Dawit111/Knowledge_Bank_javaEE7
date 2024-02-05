@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="resources/templates/templateCommon.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="contents">
+<h:form id="frmToolBar"> 
+            <p:toolbar style="background-color:white;border-color:white">
+                <f:facet name="right">
+<!--                    <p:commandButton id="btnNew" action="#/{StudentController.createNewOrSearch()}" 
+                                     style="background-color: whitesmoke; border-color: white" 
+                                     icon="#.{StudentController.icone}" validateClient="true" 
+                                     process="@this" update="@this,:frmPatient,:frmToolBar"
+                                     title="#.{StudentController.createOrSearchBundle}" />-->
+                    <span class="ui-separator">
+                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                    </span>
+                    <a href="courseView.xhtml"><i class="fa fa-fw fa-refresh" title="Refresh"></i></a>
+                    <span class="ui-separator">
+                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                    </span>
+                    <a href="Admin_Dashboard.xhtml"><i class="fa fa-fw fa-dashboard" title="Admin Dashboard"></i></a>
+                    <!--  <span class="ui-separator">
+                          <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                      </span>
+  
+                      <a href="../opdDashboard.xhtml"><i class="fa fa-fw fa-dashboard" title="Dashboard"></i></a>
+                      <span class="ui-separator" >
+                          <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                      </span>
+                      <a href="../../HomePage.xhtml"><i class="fa fa-home" title="Home Page"></i></a>
+                    -->
+                </f:facet>
+            </p:toolbar>
+        </h:form>
+        <h:form id="frmMain">
+            <p:growl id="growl" showDetail="true" autoUpdate="true" severity="information,fatal"/>
+            <div class="row">
+                
+                    <h:panelGroup id="coursepnl">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box box-primary ">
+                                    <div class="box-body ">
+
+                                        <div class="col-md-12">
+                                            <div class="form-group col-sm-12 textBoxMargin6px">
+                                                <div class="form-horizontal col-sm-12"> 
+                                                    <div class="box-header with-border">
+                                                        <h2 class="box-title">ADD NEW COURSE BELOW<small></small></h2>   
+                                                    </div>
+
+                                                    <div class="col-md-6">
+
+                                                        <div class="col-md-12 textBoxMargin6px form-group">
+                                                            <div class="form-horizontal">
+                                                                <h:outputLabel id="lblCour" value="Course Name :" class="control-label col-md-4"/>
+                                                                <div class="col-sm-8">
+                                                                    <h:inputText id="txtcourse" value="#{studentController.course.courseName}" required="true" requiredMessage="Course Name Required !"/>
+                                                                    <p:message for="txtcourse" display="icon"/> 
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 textBoxMargin6px form-group">
+                                                            <div class="form-horizontal">
+                                                                <h:outputLabel value="" class="control-label col-md-4"/>
+                                                                <div class="col-sm-4">
+                                                                    <p:commandButton value="ADD" action="#{studentController.saveCourse}" process="@this,coursepnl" update="frmMain"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div></div></div></div></div></div></div>
+                        </div>
+                    </h:panelGroup>
+                      
+                <div class="col-md-12">
+                    <p:panelGrid columns="1" style="float: left;"> 
+                        <p:dataTable id="tblSavedDoc"  var="currentRow" rowIndexVar="num" value="#{studentController.courseList}"
+                                     paginator="true" selectionMode="single" rowKey="#{currentRow.coId}"
+                                     selection="#{studentController.course}" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rows="10" rowsPerPageTemplate="5,10,15,20" style="border: none; font-family: 'Lucida Sans'; font-size: 11px; font-style: normal; font-weight: lighter; width:1000px">
+                            <p:ajax event="rowSelect" listener="#{studentController.onRowSelectCourse}" process="@this,tblSavedDoc" update="tblSavedDoc"/>
+                            <p:column headerText="No." width="50">
+                                <h:outputText value="#{num+1}"/>
+                            </p:column>
+
+                            <p:column id="docCourse" headerText="Course Name"> 
+                                <h:outputText id="txtcourse" value="#{currentRow.courseName}" style="text-align: left;"/>
+                            </p:column>
+
+                            <p:column id="decDelete" headerText="Delete" width="100">
+                                <p:commandButton process="@this,tblSavedDoc" update="tblSavedDoc" value="delete" icon="ui-icon-delete" styleClass="ui-button-danger"
+                                                 action="#{studentController.deleteCourse}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panelGrid>
+                </div>
+            </div>
+
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
+

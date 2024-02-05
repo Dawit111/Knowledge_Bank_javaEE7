@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="resources/templates/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="navigaion_content">
+        <li><a href="../opdDashboard.xhtml" title="Dashboard"><i class="fa  fa-fw fa-dashboard"></i> <span>Dashboard</span></a></li>
+    </ui:define>
+    <ui:define name="contents">
+        <h:form id="frmMain">
+            |<h:link value="Admin Home" outcome="admin_home_page.xhtml"></h:link>|--|
+            <h:link value="Logout" outcome="login.xhtml"></h:link>|
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary ">
+                        <section class="panel panel-info"  >
+                            <section class="panel-body" >
+                                <p:growl id="growl" showDetail="true" autoUpdate="true" severity="information,fatal"/>  
+                            <h:panelGroup id="regpnl">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="box box-primary ">
+                                            <div class="box-body ">
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group col-sm-12 textBoxMargin6px">
+                                                        <div class="form-horizontal col-sm-12"> 
+                                                            <p class="text-center " >
+                                                                <h2> REGISTRATION FORM</h2>
+                                                            </p>
+                                                            <div class="col-md-6">
+                                                                <div class="col-md-12 textBoxMargin6px form-group">
+                                                                    <div class="form-horizontal">
+                                                                        <p:outputLabel  value="Id:" class="control-label col-md-4"/>
+                                                                        <div class="col-sm-8">
+                                                                            <p:inputText id="txtid" value="#{StudentController.studentRegistration.idNumber}"></p:inputText>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12 textBoxMargin6px form-group">
+                                                                    <div class="form-horizontal">
+                                                                        <p:outputLabel  value="First name:" class="control-label col-md-4"/>
+                                                                        <div class="col-sm-8">
+                                                                            <p:inputText id="txtfname" value="#{StudentController.studentRegistration.firstName}"></p:inputText>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12 textBoxMargin6px form-group">
+                                                                    <div class="form-horizontal">
+                                                                        <p:outputLabel  value="Last name:" class="control-label col-md-4"/>
+                                                                        <div class="col-sm-8">
+                                                                            <p:inputText id="txtlname" value="#{StudentController.studentRegistration.lastName}"></p:inputText>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12 textBoxMargin6px form-group">
+                                                                    <div class="form-horizontal">
+                                                                        <p:outputLabel  value="department" class="control-label col-md-4"/>
+                                                                        <div class="col-sm-8">
+                                                                            <p:inputText id="txtdept" value="#{StudentController.studentRegistration.department}"></p:inputText>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                              <!--  <div class="col-md-12 textBoxMargin6px form-group">
+                                                                    <div class="form-horizontal">
+                                                                        <p:outputLabel  value="email" class="control-label col-md-4"/>
+                                                                        <div class="col-sm-8">
+                                                                            <p:inputText id="txtemail" value="#/{StudentController.studentRegistration.email}"></p:inputText>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12 textBoxMargin6px form-group">
+                                                                    <div class="form-horizontal">
+                                                                        <p:outputLabel  value="password" class="control-label col-md-4"/>
+                                                                        <div class="col-sm-8">
+                                                                            <p:password id="txtpass" value="#/{StudentController.studentRegistration.password}" class="col-md-4"  required="true" requiredMessage="Please fill password." />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>-->
+
+
+
+                                                                <div class="col-md-12 textBoxMargin6px form-group">
+                                                                    <div class="form-horizontal">
+                                                                        <h:outputLabel value="" class="control-label col-md-4"/>
+                                                                        <div class="col-sm-4">
+                                                                            <p:commandButton id="add" process="@this,:frmMain:regpnl" update=":frmMain:regpnl" value="REGISTER" class="btn btn-block btn-primary" action="#{StudentController.save()}"></p:commandButton>
+                                                                        </div>
+
+                                                                        <div class="col-sm-4">
+                                                                            <p:commandButton id="del" process="@this,:frmMain:regpnl" update=":frmMain:regpnl" value="CLEAR" class="btn btn-block btn-danger" action="#{StudentController.clear()}"></p:commandButton>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:panelGroup>
+                            </section>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+
+
+
+    </ui:define>
+</ui:composition>
+
+

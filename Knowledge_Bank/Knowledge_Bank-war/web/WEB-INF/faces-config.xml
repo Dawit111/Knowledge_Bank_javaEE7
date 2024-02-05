@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+    
+      
+    <converter>
+        <converter-id>dateConverter</converter-id>
+        <converter-class>common.utility.DateConverter</converter-class>
+    </converter>
+    <configuration>
+        <argLine>-Xmx1024mm -XX:MaxPermSize=1024m</argLine>
+    </configuration>
+    
+    <managed-bean>
+        <managed-bean-name>logincontrol</managed-bean-name>
+        <managed-bean-class>logincontroller.logincontrol</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>fileControl</managed-bean-name>
+        <managed-bean-class>fileControll.fileControl</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+     <managed-bean>
+        <managed-bean-name>SessionController</managed-bean-name>
+        <managed-bean-class>common.SessionController</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>StudentController</managed-bean-name>
+        <managed-bean-class>mycontroller.StudentController</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>fileDownloadView</managed-bean-name>
+        <managed-bean-class>fileControll.FileDownloadView</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>lazyView</managed-bean-name>
+        <managed-bean-class>ViewController.LazyView</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>customerService</managed-bean-name>
+        <managed-bean-class>ViewController.CustomerService</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>qA_controller</managed-bean-name>
+        <managed-bean-class>fileControll.QA_controller</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>userAccountController</managed-bean-name>
+        <managed-bean-class>mycontroller.UserAccountController</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+</faces-config>

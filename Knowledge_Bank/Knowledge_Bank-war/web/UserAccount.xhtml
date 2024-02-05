@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    template="resources/templates/templateCommon.xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:define name="navigaion_content">
+        <li><a href="Admin_Dashboard.xhtml" title="Dashboard"><i class="fa  fa-fw fa-dashboard"></i> <span>Admin Dashboard</span></a></li>
+    </ui:define>
+    <ui:define name="contents">
+        <h:form id="frmAccount">
+            <p:growl id="growl" showDetail="true" autoUpdate="true" severity="information,fatal"/>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary ">
+                        <div class="box-body ">
+
+                            <div class="col-md-12">
+                                <div class="form-group col-sm-12 textBoxMargin6px">
+                                    <div class="form-horizontal col-sm-12"> 
+                                        <p class="text-center " >
+                                            <h2> Create your Account Here </h2>
+                                        </p>
+                                        <br></br>
+                                        <div class="col-md-6">
+
+                                            <div class="col-md-12 textBoxMargin6px form-group">
+                                                <div class="form-horizontal">
+                                                    <p:outputLabel  value="User name:" class="control-label col-md-4"/>
+                                                    <div class="col-sm-8">
+                                                        <p:inputText id="txtfname" value="#{userAccountController.useraccount.username}"></p:inputText>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 textBoxMargin6px form-group">
+                                                <div class="form-horizontal">
+                                                    <p:outputLabel  value="Password:" class="control-label col-md-4"/>
+                                                    <div class="col-sm-8">
+                                                        <p:password id="txtlname" value="#{userAccountController.useraccount.password}"></p:password>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 textBoxMargin6px form-group">
+                                                <div class="form-horizontal">
+                                                    <p:outputLabel  value="Confirm Password:" class="control-label col-md-4"/>
+                                                    <div class="col-sm-8">
+                                                        <p:password id="txtconf" value="#{userAccountController.confirmPassword}"></p:password>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--                                                <div class="col-md-12 textBoxMargin6px form-group">
+                                                                                                <div class="form-horizontal">
+                                                                                                    <p:outputLabel  value="Role" class="control-label col-md-4"/>
+                                                                                                    <div class="col-sm-8">
+                                                                                                       
+                                                                                                        <h:selectOneRadio value="#.{userAccountController.useraccount.role}">
+                                                                                                                <f:selectItem itemValue="stud" itemLabel="Student"/> 
+                                                                                                            </h:selectOneRadio>
+                                                                                                      
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>-->
+
+                                            <div class="col-md-12 textBoxMargin6px form-group">
+                                                <h:outputLabel for="txtId"  class="control-label col-md-4" value="School Id Number:"/>
+                                                <div class="col-sm-8">
+                                                    <p:autoComplete   id="txtId" placeholder="example:BDU 1234"  value="#{userAccountController.register.studId}"  
+                                                                      emptyMessage="Id not Found"     maxResults="10"      style="width: 100%"  
+                                                                      completeMethod="#{userAccountController.searchStudentByIdNo}" required="true"
+                                                                      var="stud" itemValue="#{stud.studId}" itemLabel="#{stud.idNumber}"   >
+                                                        <p:column headerText="ID"  >
+                                                            <h:outputText value="#{stud.idNumber}" />
+                                                        </p:column>
+                                                        <p:ajax  event="itemSelect" listener="#{userAccountController.getStudentByIDNumber}" process="@this" 
+                                                                 update="@this,frmAccount" /> 
+                                                    </p:autoComplete>
+                                                    <p:message for="txtId" display="icon"/>
+                                                </div>
+                                            </div>
+
+
+
+
+                                            <div class="col-md-12 textBoxMargin6px form-group">
+                                                <div class="form-horizontal">
+                                                    <h:outputLabel value="" class="control-label col-md-4"/>
+                                                    <div class="col-sm-4">
+                                                        <p:commandButton id="add" process="@this,:frmAccount" update="@this,txtId,txtfname,txtlname,txtconf" 
+                                                                         value="Save" class="btn btn-block btn-primary" action="#{userAccountController.saveAcc()}"></p:commandButton>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="col-md-12">
+                                                        <h:outputLabel class="col-md-12"  value=""/>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <h:outputLabel class="col-md-12"  value=""/>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h:outputLabel class="col-md-12"  value=""/>
+                                                    </div>
+                                                    Want to Login ?<h:link value=' click here' outcome="login.xhtml" />
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

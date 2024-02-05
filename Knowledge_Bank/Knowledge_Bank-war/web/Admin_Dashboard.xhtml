@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="resources/templates/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="navigaion_content">
+        <li class="header">MAIN NAVIGATION</li>    
+        <!-- <li class="treeview">       
+             <a href="../HomePage.xhtml"><i class="fa fa-home"></i> Home 
+                 <i class="fa fa-angle-double-left pull-right"></i>
+             </a>
+         </li> -->
+        <li class="treeview">
+            <a href="#treeview-menu">
+                <i class="fa fa-user"></i>
+                <span>Manage User</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="admin_home_page.xhtml"><i class="fa fa-fw"></i>View Available User</a></li> 
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#treeview-menu">
+                <i class="fa fa-file-pdf-o"></i>
+                <span>Manage Files</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="download.xhtml"><i class="fa fa-fw"></i>View Available File</a></li> 
+                <li><a href="upload.xhtml"><i class="fa fa-fw"></i>Upload a File</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#treeview-menu">
+                <i class="fa fa-tasks"></i>
+                <span>Manage Academics</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="Academics.xhtml"><i class="fa fa-fw"></i>Assign Academics</a></li> 
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#treeview-menu">
+                <i class="fa fa-tasks"></i>
+                <span>Manage Faculties</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="facultyView.xhtml"><i class="fa fa-fw"></i>View Faculties</a></li> 
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#treeview-menu">
+                <i class="fa fa-tasks"></i>
+                <span>Manage Departments</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="departmentView.xhtml"><i class="fa fa-fw"></i>View Departments</a></li> 
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#treeview-menu">
+                <i class="fa fa-graduation-cap"></i>
+                <span>Manage Courses</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="courseView.xhtml"><i class="fa fa-fw"></i>View Courses</a></li> 
+            </ul>
+        </li>
+
+    </ui:define>
+
+    <ui:define name="contents">
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Adminstrator Dashboard</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <!--                                    <i class="fa fa-bar-chart fa-5x"></i>-->
+                                    <i class="fa fa-users fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="icon-bar">
+                                        <h1><h:outputText value="#{studentController.userAmmount(users)}"/></h1>
+                                    </div>
+                                    <div><b><i>Total Users</i></b></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="admin_home_page.xhtml">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <!--                                    <i class="fa fa-tasks fa-5x"></i>-->
+                                    <i class="fa fa-file-pdf-o fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="icon-bar">
+                                        <h1><h:outputText value="#{fileControl.fileAmount(files)}"/></h1>
+                                    </div>
+                                    <div><b><i>Total Files</i></b></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="download.xhtml">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <!--                                    <i class="fa fa-tasks fa-5x"></i>-->
+                                    <i class="fa fa-graduation-cap fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="icon-bar">
+                                        <h1><h:outputText value="#{studentController.FacultyAmount(faculties)}"/></h1>
+                                    </div>
+                                    <div><b><i>Total Faculties</i></b></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="facultyView.xhtml">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <!--                                    <i class="fa fa-tasks fa-5x"></i>-->
+                                    <i class="fa fa-graduation-cap fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="icon-bar">
+                                        <h1><h:outputText value="#{studentController.departmentAmount(departments)}"/></h1>
+                                    </div>
+                                    <div><b><i>Total Department</i></b></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="departmentView.xhtml">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-graduation-cap fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">
+                                        <h1><h:outputText value="#{studentController.courseAmmount(courses)}"/></h1>
+                                    </div>
+                                    <div><b><i>Total Courses</i></b></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="courseView.xhtml">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+            <!-- /.row -->
+        </div>
+    </ui:define>
+
+</ui:composition>

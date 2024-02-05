@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Knowledge_Bank-ejb">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Knowledge_Bank/build/Knowledge_Bank-ejb.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
